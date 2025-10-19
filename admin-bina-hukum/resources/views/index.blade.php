@@ -114,9 +114,6 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Data Warga</h6>
-                        <a href="{{ route('warga.create') }}" class="btn btn-primary btn-sm">
-                            + Tambah Warga
-                        </a>
                     </div>
 
                     <div class="table-responsive">
@@ -174,11 +171,6 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Jenis Dokumen</h6>
-                        <div>
-                            <a href="{{ route('jenis_dokumen.create') }}" class="btn btn-primary btn-sm">
-                                + Tambah Jenis Dokumen
-                            </a>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table id="table-jenis-dokumen" class="table table-centered table-nowrap mb-0 rounded">

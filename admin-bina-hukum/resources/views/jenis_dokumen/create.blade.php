@@ -36,9 +36,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('<a href="{{ route('index') }}" class="nav-item nav-link">
-                        <i class="fa fa-home me-2"></i> Dashboard
-                    </a>') }}" class="nav-item nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-item nav-link">
                         <i class="fa fa-home me-2"></i> Dashboard
                     </a>
                     <a href="{{ route('warga.index') }}" class="nav-item nav-link">
@@ -76,6 +74,12 @@
             <!-- Form Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded p-4">
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h6 class="mb-0">Tambah Jenis Dokumen</h6>
                         <a href="{{ route('jenis_dokumen.index') }}" class="btn btn-secondary btn-sm">

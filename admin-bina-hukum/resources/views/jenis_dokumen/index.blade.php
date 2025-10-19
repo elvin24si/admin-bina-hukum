@@ -110,6 +110,19 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Jenis Dokumen</h6>
                         <div>

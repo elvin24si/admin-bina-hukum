@@ -79,6 +79,12 @@
             <!-- Edit Form Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded p-4">
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h6 class="mb-0">Edit Data Warga</h6>
                         <a href="{{ route('warga.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
