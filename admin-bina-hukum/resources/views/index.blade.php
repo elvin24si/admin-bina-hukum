@@ -126,8 +126,7 @@
                                     <th class="border-0">Agama</th>
                                     <th class="border-0">Pekerjaan</th>
                                     <th class="border-0">Telp</th>
-                                    <th class="border-0">Email</th>
-                                    <th class="border-0 rounded-end">Action</th>
+                                    <th class="border-0 rounded-end">Email</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,23 +139,6 @@
                                         <td>{{ $item->pekerjaan ?? '-' }}</td>
                                         <td>{{ $item->telp ?? '-' }}</td>
                                         <td>{{ $item->email ?? '-' }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('warga.edit', $item->warga_id) }}"
-                                                class="btn btn-sm btn-outline-primary me-2 d-inline-flex align-items-center">
-                                                <i class="bi bi-pencil-square me-1"></i> Edit
-                                            </a>
-
-                                            <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-sm btn-outline-danger d-inline-flex align-items-center"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    <i class="bi bi-trash me-1"></i> Hapus
-                                                </button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -179,8 +161,7 @@
                                     <th class="border-0 rounded-start">Nama Jenis</th>
                                     <th class="border-0">Deskripsi</th>
                                     <th class="border-0">Created</th>
-                                    <th class="border-0">Last Updated</th>
-                                    <th class="border-0 rounded-end">Action</th>
+                                    <th class="border-0 rounded-end">Last Updated</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -190,23 +171,6 @@
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>{{ $item->created_at ? $item->created_at->format('d M Y H:i') : '-' }}</td>
                                         <td>{{ $item->updated_at ? $item->updated_at->format('d M Y H:i') : '-' }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('jenis_dokumen.edit', $item->jenis_id) }}"
-                                                class="btn btn-sm btn-outline-primary me-2 d-inline-flex align-items-center">
-                                                <i class="bi bi-pencil-square me-1"></i> Edit
-                                            </a>
-
-                                            <form action="{{ route('jenis_dokumen.destroy', $item->jenis_id) }}"
-                                                method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-sm btn-outline-danger d-inline-flex align-items-center"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    <i class="bi bi-trash me-1"></i> Hapus
-                                                </button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
