@@ -14,7 +14,7 @@
                 <i class="fa fa-file-alt me-2"></i> Jenis Dokumen
             </a>
             <a href="{{ route('user.index') }}" class="nav-item nav-link">
-                <i class="fa fa-user me-2"></i> Data User
+                <i class="fa fa-users me-2"></i> Data User
             </a>
             <div class="d-flex justify-content-center">
             <a href="/" class="btn btn-danger ms-3 mb-3">
