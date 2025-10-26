@@ -13,7 +13,7 @@ class JenisDokumenController extends Controller
     public function index()
     {
         $data['dataJenisDokumen'] = jenis_dokumen::all();
-        return view('jenis_dokumen.index', $data);
+        return view('admin.jenis_dokumen.index', $data);
     }
 
     /**
@@ -21,7 +21,7 @@ class JenisDokumenController extends Controller
      */
     public function create()
     {
-        return view('jenis_dokumen.create');
+        return view('admin.jenis_dokumen.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class JenisDokumenController extends Controller
     public function edit(string $id)
     {
         $data['jenisDokumen'] = jenis_dokumen::findOrFail($id);
-        return view('jenis_dokumen.edit', $data);
+        return view('admin.jenis_dokumen.edit', $data);
     }
 
     /**
