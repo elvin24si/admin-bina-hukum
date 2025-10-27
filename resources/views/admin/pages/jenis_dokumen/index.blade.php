@@ -39,7 +39,7 @@
                         @foreach ($dataJenisDokumen as $item)
                             <tr>
                                 <td>{{ $item->nama_jenis }}</td>
-                                <td>{{ $item->deskripsi }}</td>
+                                <td>{{ Str::limit($item->deskripsi, 50) }}</td>
                                 <td>{{ $item->created_at ? $item->created_at->format('d M Y H:i') : '-' }}</td>
                                 <td>{{ $item->updated_at ? $item->updated_at->format('d M Y H:i') : '-' }}</td>
                                 <td class="text-center">
@@ -63,7 +63,7 @@
                                         data-bs-toggle="modal" data-bs-target="#descModal{{ $item->jenis_id }}">
                                         <i class="bi bi-eye me-1"></i> Lihat
                                     </button>
-                                    
+
                                     <div class="modal fade" id="descModal{{ $item->jenis_id }}" tabindex="-1"
                                         aria-labelledby="descModalLabel{{ $item->jenis_id }}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -80,6 +80,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach
