@@ -18,7 +18,7 @@
                 <table id="table-warga" class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-0 rounded-start">No. KTP</th>
+                            <th class="border-0 rounded-start">Nomor KTP</th>
                             <th class="border-0">Nama</th>
                             <th class="border-0">Jenis Kelamin</th>
                             <th class="border-0">Agama</th>
