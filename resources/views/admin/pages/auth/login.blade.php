@@ -23,6 +23,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-image: url('img/login-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            position: relative;
+            z-index: 0;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
         }
 
         .login-container {
@@ -35,6 +53,15 @@
             border-radius: 10px;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             padding: 2rem;
+        }
+
+        .site-description {
+            font-size: 0.95rem;
+            color: #d4d4d4;
+            max-width: 600px;
+            margin: 1rem auto;
+            text-align: center;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -55,9 +82,16 @@
                 </div>
             @endif
 
-            <div class="text-center mb-4">
-                <h4 class="mb-0">Login Bina Desa</h4>
+            <div class="text-center mb-4 title-section">
+                <img src="img/logo.png" height="100px" width="100px" alt="Bina Desa Logo" class="logo">
+
+                <h2 class="site-title">BINA DESA</h2>
+
+                <p class="site-subtitle">Produk Hukum dan Dokumen Publik</p>
+
+                <h4 class="mb-0 mt-3">Login</h4>
             </div>
+
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -93,7 +127,9 @@
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
         </div>
-
+        <p class="text-center site-description mt-3">
+            Platform pengelolaan produk hukum dan dokumen publid bina desa.
+        </p>
         <div class="footer">
             &copy; <a href="#">Bina Desa Dokumen Hukum</a>, All Right Reserved.
         </div>

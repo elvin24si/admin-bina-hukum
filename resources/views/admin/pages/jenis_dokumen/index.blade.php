@@ -58,6 +58,28 @@
                                             <i class="bi bi-trash me-1"></i> Hapus
                                         </button>
                                     </form>
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#descModal{{ $item->jenis_id }}">
+                                        <i class="bi bi-eye me-1"></i> Lihat
+                                    </button>
+                                    
+                                    <div class="modal fade" id="descModal{{ $item->jenis_id }}" tabindex="-1"
+                                        aria-labelledby="descModalLabel{{ $item->jenis_id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="descModalLabel{{ $item->jenis_id }}">
+                                                        Deskripsi Lengkap</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $item->deskripsi }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

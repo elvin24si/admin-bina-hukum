@@ -42,7 +42,20 @@
                             <tr>
                                 <td>{{ $item->no_ktp }}</td>
                                 <td>{{ $item->nama }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
+                                <td>
+                                    @if ($item->jenis_kelamin === 'Laki-laki')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #2196f3;">
+                                            {{ $item->jenis_kelamin }}
+                                        </span>
+                                    @elseif ($item->jenis_kelamin === 'Perempuan')
+                                        <span class="badge rounded-pill px-3 py-2 text-dark"
+                                            style="background-color: #ff7a87;">
+                                            {{ $item->jenis_kelamin }}
+                                        </span>
+                                    @endif
+                                </td>
+
                                 <td>{{ $item->agama }}</td>
                                 <td>{{ $item->pekerjaan ?? '-' }}</td>
                                 <td>{{ $item->telp ?? '-' }}</td>

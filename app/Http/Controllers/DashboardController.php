@@ -13,6 +13,6 @@ class DashboardController extends Controller
         $data['dataWarga'] = Warga::all();
         $data['dataJenisDokumen'] = Jenis_dokumen::all();
 
-        return view('admin.dashboard', $data);
+        return view('admin.pages.dashboard', $data);
     }
 }

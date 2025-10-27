@@ -6,7 +6,7 @@
     @include('layouts.admin.header')
     {{-- End Header --}}
 </head>
-
+@include('layouts.admin.floating-button')
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Sidebar Start -->
