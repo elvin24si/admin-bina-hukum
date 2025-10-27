@@ -128,7 +128,7 @@
             </form>
         </div>
         <p class="text-center site-description mt-3">
-            Platform pengelolaan produk hukum dan dokumen publid bina desa.
+            Platform pengelolaan produk hukum dan dokumen publik bina desa.
         </p>
         <div class="footer">
             &copy; <a href="#">Bina Desa Dokumen Hukum</a>, All Right Reserved.
