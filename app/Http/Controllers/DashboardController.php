@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warga;
-use App\Models\Jenis_dokumen;
+use App\Models\jenis_dokumen;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
