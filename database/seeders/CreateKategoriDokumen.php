@@ -13,7 +13,7 @@ class CreateKategoriDokumen extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        KategoriDokumen::create([
             'nama' => 'Keuangan',
             'deskripsi' => 'Dokumen terkait anggaran, laporan keuangan, dan pertanggungjawaban.',
         ]);

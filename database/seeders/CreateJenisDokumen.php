@@ -13,7 +13,7 @@ class CreateJenisDokumen extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        JenisDokumen::create([
             'nama_jenis' => 'Peraturan Desa',
             'deskripsi' => 'Dokumen hukum berupa peraturan yang ditetapkan oleh Kepala Desa dan BPD.',
         ]);

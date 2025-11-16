@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('judul');
             $table->date('tanggal')->nullable();
             $table->text('ringkasan')->nullable();
-            $table->string('status')->default('aktif');
+            $table->string('status');
 
             $table->timestamps();
 
