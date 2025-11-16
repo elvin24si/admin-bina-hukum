@@ -18,7 +18,7 @@
                 <table id="table-warga" class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-0 rounded-start">Nomor KTP</th>
+                            <th class="border-0 rounded-start">No. KTP</th>
                             <th class="border-0">Nama</th>
                             <th class="border-0">Jenis Kelamin</th>
                             <th class="border-0">Agama</th>
@@ -32,7 +32,19 @@
                             <tr>
                                 <td>{{ $item->no_ktp }}</td>
                                 <td>{{ $item->nama }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
+                                <td>
+                                    @if ($item->jenis_kelamin === 'Laki-laki')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #2196f3;">
+                                            {{ $item->jenis_kelamin }}
+                                        </span>
+                                    @elseif ($item->jenis_kelamin === 'Perempuan')
+                                        <span class="badge rounded-pill px-3 py-2 text-dark"
+                                            style="background-color: #ff7a87;">
+                                            {{ $item->jenis_kelamin }}
+                                        </span>
+                                    @endif
+                                </td>
                                 <td>{{ $item->agama }}</td>
                                 <td>{{ $item->pekerjaan ?? '-' }}</td>
                                 <td>{{ $item->telp ?? '-' }}</td>
@@ -46,32 +58,60 @@
     </div>
     <!-- Data Warga End -->
 
-    <!-- Jenis Dokumen Start -->
+    <!-- Dokumen Hukum Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Jenis Dokumen</h6>
+                <h6 class="mb-0">Dokumen Hukum</h6>
             </div>
             <div class="table-responsive">
-                <table id="table-jenis-dokumen" class="table table-centered table-nowrap mb-0 rounded">
+                <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-0 rounded-start">Nama Jenis</th>
-                            <th class="border-0">Deskripsi</th>
-                            <th class="border-0">Created</th>
-                            <th class="border-0 rounded-end">Last Updated</th>
+                            <th class="border-0 rounded-start">Nomor</th>
+                            <th class="border-0">Judul</th>
+                            <th class="border-0">Jenis</th>
+                            <th class="border-0">Kategori</th>
+                            <th class="border-0">Tanggal</th>
+                            <th class="border-0">Status</th>
+                            <th class="border-0 rounded-end">Ringkasan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dataJenisDokumen as $item)
+                        @foreach ($dataDokumenHukum as $item)
                             <tr>
-                                <td>{{ $item->nama_jenis }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td>{{ $item->created_at ? $item->created_at->format('d M Y H:i') : '-' }}</td>
-                                <td>{{ $item->updated_at ? $item->updated_at->format('d M Y H:i') : '-' }}</td>
+                                <td>{{ $item->nomor }}</td>
+                                <td>{{ $item->judul }}</td>
+                                <td>{{ $item->jenis?->nama_jenis ?? '-' }}</td>
+                                <td>{{ $item->kategori?->nama ?? '-' }}</td>
+                                <td>{{ $item->tanggal ? date('d M Y', strtotime($item->tanggal)) : '-' }}</td>
+                                <td>{{ $item->status }}</td>
+
+                                <td>
+                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#ringkasanModal{{ $item->dokumen_id }}">
+                                        Lihat
+                                    </button>
+
+                                    <div class="modal fade" id="ringkasanModal{{ $item->dokumen_id }}" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Ringkasan Dokumen</h5>
+                                                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $item->ringkasan ?? 'Tidak ada ringkasan.' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jenis_dokumen;
+use App\Models\JenisDokumen;
 use Illuminate\Http\Request;
 
 class JenisDokumenController extends Controller
@@ -12,7 +12,7 @@ class JenisDokumenController extends Controller
      */
     public function index()
     {
-        $data['dataJenisDokumen'] = jenis_dokumen::all();
+        $data['dataJenisDokumen'] = JenisDokumen::all();
         return view('admin.pages.jenis_dokumen.index', $data);
     }
 
@@ -34,7 +34,7 @@ class JenisDokumenController extends Controller
             'deskripsi'  => 'nullable|string',
         ]);
 
-        jenis_dokumen::create($validated);
+        JenisDokumen::create($validated);
 
         return redirect()->route('jenis_dokumen.index')
             ->with('success', 'Jenis dokumen berhasil ditambahkan!');
@@ -45,7 +45,7 @@ class JenisDokumenController extends Controller
      */
     public function edit(string $id)
     {
-        $data['jenisDokumen'] = jenis_dokumen::findOrFail($id);
+        $data['jenisDokumen'] = JenisDokumen::findOrFail($id);
         return view('admin.pages.jenis_dokumen.edit', $data);
     }
 
@@ -54,7 +54,7 @@ class JenisDokumenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $jenisDokumen = jenis_dokumen::findOrFail($id);
+        $jenisDokumen = JenisDokumen::findOrFail($id);
 
         $validated = $request->validate([
             'nama_jenis' => 'required|string|max:255|unique:jenis_dokumen,nama_jenis,' . $jenisDokumen->jenis_id . ',jenis_id',
@@ -72,7 +72,7 @@ class JenisDokumenController extends Controller
      */
     public function destroy(string $id)
     {
-        $jenisDokumen = jenis_dokumen::findOrFail($id);
+        $jenisDokumen = JenisDokumen::findOrFail($id);
         $jenisDokumen->delete();
 
         return redirect()->route('jenis_dokumen.index')

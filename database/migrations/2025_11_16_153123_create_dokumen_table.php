@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dokumen_hukum', function (Blueprint $table) {
+            $table->increments('dokumen_id');
 
-            $table->id('dokumen_id');
-            $table->foreignId('jenis_id')->constrained('jenis_dokumen', 'jenis_id');
-            $table->foreignId('kategori_id')->constrained('kategori_dokumen', 'kategori_id');
+            $table->unsignedInteger('jenis_id');
+            $table->unsignedInteger('kategori_id');
 
             $table->string('nomor')->unique();
             $table->string('judul');
@@ -24,6 +24,16 @@ return new class extends Migration
             $table->string('status')->default('aktif');
 
             $table->timestamps();
+
+            $table->foreign('jenis_id')
+                ->references('jenis_id')
+                ->on('jenis_dokumen')
+                ->onDelete('cascade');
+
+            $table->foreign('kategori_id')
+                ->references('kategori_id')
+                ->on('kategori_dokumen')
+                ->onDelete('cascade');
         });
 
     }
@@ -33,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dokumen_table');
+        Schema::dropIfExists('dokumen_hukum');
     }
 };

@@ -3,13 +3,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class kategori_dokumen extends Model
+class KategoriDokumen extends Model
 {
     protected $table      = 'kategori_dokumen';
     protected $primaryKey = 'kategori_id';
-    protected $fillable   = ['nama_jenis', 'deskripsi'];
+    protected $fillable   = ['nama', 'deskripsi'];
 
-    public function dokumen_hukum()
+    public function dokumen()
     {
         return $this->hasMany(dokumen_hukum::class, 'kategori_id');
     }
