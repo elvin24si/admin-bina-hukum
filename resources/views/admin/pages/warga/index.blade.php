@@ -24,6 +24,28 @@
             </div>
 
             <div class="table-responsive">
+                <form method="GET" action="{{ route('warga.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select name="jenis_kelamin" class="form-select" onchange="this.form.submit()">
+                                <option value="">All</option>
+                                <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                    Laki-laki</option>
+                                <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                    Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" value="{{ request('search') }}"
+                                    placeholder="Search">
+                                <button type="submit" class="input-group-text" id="basic-addon2">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <table id="table-warga" class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
@@ -81,6 +103,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    {{ $dataWarga->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>

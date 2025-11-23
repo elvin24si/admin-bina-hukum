@@ -14,14 +14,7 @@ class JenisDokumen extends Model
     {
         return $this->hasMany(dokumen_hukum::class, 'jenis_id');
     }
-        public function scopeFilter(Builder $query, $request, array $filterableColumns): Builder
-    {
-        foreach ($filterableColumns as $column) {
-            if ($request->filled($column)) {
-                $query->where($column, $request->input($column));
-            }}
-        return $query;
-    }
+
     public function scopeSearch($query, $request, array $columns)
     {
         if ($request->filled('search')) {

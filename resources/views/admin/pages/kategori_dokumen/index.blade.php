@@ -25,6 +25,19 @@
             </div>
 
             <div class="table-responsive">
+                <form method="GET" action="{{ route('kategori_dokumen.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" value="{{ request('search') }}"
+                                    placeholder="Search">
+                                <button type="submit" class="input-group-text" id="basic-addon2">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
@@ -87,8 +100,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
+                <div class="mt-3">
+                    {{ $dataKategoriDokumen->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>

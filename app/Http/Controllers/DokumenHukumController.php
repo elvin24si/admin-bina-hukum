@@ -12,14 +12,15 @@ class DokumenHukumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Load relational data (jenis + kategori)
-        $data['dataDokumenHukum'] = DokumenHukum::with(['jenis', 'kategori'])
-            ->orderBy('tanggal', 'desc')
-            ->get();
+    public function index(Request $request){
+    $filterableColumns = ['status'];
+    $searchableColumns = ['judul', 'ringkasan'];
 
-        return view('admin.pages.dokumen_hukum.index', $data);
+    $data['dataDokumenHukum'] = DokumenHukum::filter($request, $filterableColumns)
+        ->search($request, $searchableColumns)
+        ->paginate(10)->withQueryString();
+
+    return view('admin.pages.dokumen_hukum.index', $data);
     }
 
     /**

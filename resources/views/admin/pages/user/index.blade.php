@@ -25,6 +25,19 @@
                 </div>
             </div>
             <div class="table-responsive">
+                <form method="GET" action="{{ route('user.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" value="{{ request('search') }}"
+                                    placeholder="Search">
+                                <button type="submit" class="input-group-text" id="basic-addon2">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <table id="table-jenis-dokumen" class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
@@ -39,15 +52,14 @@
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->password}}</td>
+                                <td>{{ $item->password }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('user.edit', $item->id) }}"
                                         class="btn btn-sm btn-outline-primary me-2 d-inline-flex align-items-center">
                                         <i class="bi bi-pencil-square me-1"></i> Edit
                                     </a>
 
-                                    <form action="{{ route('user.destroy', $item->id) }}" method="POST"
-                                        class="d-inline">
+                                    <form action="{{ route('user.destroy', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -61,6 +73,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    {{ $dataUser->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>

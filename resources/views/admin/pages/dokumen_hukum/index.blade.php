@@ -27,6 +27,32 @@
             </div>
 
             <div class="table-responsive">
+                <form method="GET" action="{{ route('dokumen_hukum.index') }}" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select name="status" class="form-select" onchange="this.form.submit()">
+                                <option value="">All</option>
+                                <option value="Aktif" {{ request('status') == 'Aktif' ? 'selected' : '' }}>
+                                    Aktif</option>
+                                <option value="Tidak Aktif" {{ request('status') == 'Tidak Aktif' ? 'selected' : '' }}>
+                                    Tidak Aktif</option>
+                                <option value="Draft" {{ request('status') == 'Draft' ? 'selected' : '' }}>
+                                    Draft</option>
+                                <option value="Revisi" {{ request('status') == 'Revisi' ? 'selected' : '' }}>
+                                    Revisi</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" value="{{ request('search') }}"
+                                    placeholder="Search">
+                                <button type="submit" class="input-group-text" id="basic-addon2">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
@@ -49,7 +75,29 @@
                                 <td>{{ $item->jenis?->nama_jenis ?? '-' }}</td>
                                 <td>{{ $item->kategori?->nama ?? '-' }}</td>
                                 <td>{{ $item->tanggal ? date('d M Y', strtotime($item->tanggal)) : '-' }}</td>
-                                <td>{{ $item->status }}</td>
+                                <td>
+                                    @if ($item->status === 'Aktif')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #0cb200;">
+                                            {{ $item->status }}
+                                        </span>
+                                    @elseif ($item->status === 'Tidak Aktif')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #d40000;">
+                                            {{ $item->status }}
+                                        </span>
+                                    @elseif ($item->status === 'Draft')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #5221f3;">
+                                            {{ $item->status }}
+                                        </span>
+                                    @elseif ($item->status === 'Revisi')
+                                        <span class="badge rounded-pill px-3 py-2 text-white"
+                                            style="background-color: #d4ca00;">
+                                            {{ $item->status }}
+                                        </span>
+                                    @endif
+                                </td>
 
                                 <td>
                                     <button class="btn btn-sm btn-outline-secondary"
@@ -98,8 +146,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
+                <div class="mt-3">
+                    {{ $dataDokumenHukum->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>

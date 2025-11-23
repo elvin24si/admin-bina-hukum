@@ -10,9 +10,14 @@ class KategoriDokumenController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataKategoriDokumen'] = KategoriDokumen::all();
+        $searchableColumns = ['nama', 'deskripsi'];
+
+        $data['dataKategoriDokumen'] = KategoriDokumen::search($request, $searchableColumns)
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.pages.kategori_dokumen.index', $data);
     }
 
