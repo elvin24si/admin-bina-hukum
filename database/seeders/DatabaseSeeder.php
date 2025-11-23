@@ -2,8 +2,12 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use DokumenHukumSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use JenisDokumenSeeder;
+use KategoriDokumenSeeder;
+use WargaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,9 +21,12 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
-            CreateKategoriDokumen::class,
-            CreateJenisDokumen::class,
-            CreateDokumenHukum::class,
+            CreateFirstUser::class,
+            CreateUserDummy::class,
+            JenisDokumenSeeder::class,
+            KategoriDokumenSeeder::class,
+            DokumenHukumSeeder::class,
+            WargaSeeder::class
         ]);
 
         User::factory()->create([
