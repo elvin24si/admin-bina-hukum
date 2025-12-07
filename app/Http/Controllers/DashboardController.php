@@ -12,10 +12,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $data['dataWarga'] = Warga::all();
-        $data['dataJenisDokumen'] = JenisDokumen::all();
-        $data['dataKategoriDokumen'] = KategoriDokumen::all();
-        $data['dataDokumenHukum'] = DokumenHukum::all();
+        $data['dataWarga'] = Warga::paginate(10);
+        $data['dataDokumenHukum'] = DokumenHukum::paginate(10);
 
         return view('admin.pages.dashboard', $data);
     }

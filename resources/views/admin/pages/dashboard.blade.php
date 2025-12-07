@@ -53,6 +53,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    {{ $dataWarga->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
@@ -111,8 +114,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
+                <div class="mt-3">
+                    {{ $dataDokumenHukum->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
