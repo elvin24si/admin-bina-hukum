@@ -16,7 +16,7 @@ class RoleMiddleware
         }
 
         if (!in_array(Auth::user()->role, $roles)) {
-            abort(403, 'No Access.');
+            abort(403, 'Forbidden.');
         }
 
         return $next($request);
