@@ -31,14 +31,14 @@
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Nomor Dokumen <span class="text-danger">*</span></label>
-                    <input type="text" name="nomor" class="form-control"
-                        placeholder="Nomor dokumen hukum" value="{{ old('nomor') }}" required>
+                    <input type="text" name="nomor" class="form-control" placeholder="Nomor dokumen hukum"
+                        value="{{ old('nomor') }}" required>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Judul <span class="text-danger">*</span></label>
-                    <input type="text" name="judul" class="form-control"
-                        placeholder="Judul dokumen" value="{{ old('judul') }}" required>
+                    <input type="text" name="judul" class="form-control" placeholder="Judul dokumen"
+                        value="{{ old('judul') }}" required>
                 </div>
 
                 <div class="mb-3 text-start">
@@ -74,14 +74,26 @@
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Status <span class="text-danger">*</span></label>
-                    <input type="text" name="status" class="form-control"
-                        placeholder="Status dokumen" value="{{ old('status') }}" required>
+                    <input type="text" name="status" class="form-control" placeholder="Status dokumen"
+                        value="{{ old('status') }}" required>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Ringkasan</label>
-                    <textarea name="ringkasan" class="form-control" rows="4"
-                        placeholder="Ringkasan isi dokumen">{{ old('ringkasan') }}</textarea>
+                    <textarea name="ringkasan" class="form-control" rows="4" placeholder="Ringkasan isi dokumen">{{ old('ringkasan') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-select" required>
+                        <option value="">-- Pilih Role --</option>
+                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
+                            Admin
+                        </option>
+                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
+                            Viewer
+                        </option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>

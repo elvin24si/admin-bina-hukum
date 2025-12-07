@@ -62,7 +62,7 @@
                             <th class="border-0">Kategori</th>
                             <th class="border-0">Tanggal</th>
                             <th class="border-0">Status</th>
-                            <th class="border-0">Ringkasan</th>
+                            <th class="border-0">Lampiran</th>
                             <th class="border-0 rounded-end">Action</th>
                         </tr>
                     </thead>
@@ -100,48 +100,50 @@
                                 </td>
 
                                 <td>
-                                    <button class="btn btn-sm btn-outline-secondary"
-                                        data-bs-toggle="modal" data-bs-target="#ringkasanModal{{ $item->dokumen_id }}">
-                                        Lihat
-                                    </button>
-
-                                    <div class="modal fade" id="ringkasanModal{{ $item->dokumen_id }}" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Ringkasan Dokumen</h5>
-                                                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    {{ $item->ringkasan ?? 'Tidak ada ringkasan.' }}
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <a href="{{ route('dokumen_hukum.show', $item->dokumen_id) }}"
+                                        class="btn btn-sm btn-outline-secondary me-2">
+                                        <i class="bi bi-paperclip me-1"></i> Detail
+                                    </a>
                                 </td>
 
                                 <td class="text-center">
 
-                                    <a href="{{ route('dokumen_hukum.edit', $item->dokumen_id) }}"
-                                        class="btn btn-sm btn-outline-primary me-2">
-                                        <i class="bi bi-pencil-square me-1"></i> Edit
-                                    </a>
+    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-toggle="modal"
+        data-bs-target="#ringkasanModal{{ $item->dokumen_id }}">
+        Ringkasan
+    </button>
 
-                                    <form action="{{ route('dokumen_hukum.destroy', $item->dokumen_id) }}"
-                                        method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-sm btn-outline-danger"
-                                            onclick="return confirm('Yakin ingin menghapus dokumen ini?')">
-                                            <i class="bi bi-trash me-1"></i> Hapus
-                                        </button>
-                                    </form>
+    <div class="modal fade" id="ringkasanModal{{ $item->dokumen_id }}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ringkasan Dokumen</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {{ $item->ringkasan ?? 'Tidak ada ringkasan.' }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                </td>
+    <a href="{{ route('dokumen_hukum.edit', $item->dokumen_id) }}"
+        class="btn btn-sm btn-outline-primary me-2">
+        <i class="bi bi-pencil-square me-1"></i> Edit
+    </a>
+
+    <form action="{{ route('dokumen_hukum.destroy', $item->dokumen_id) }}" method="POST"
+        class="d-inline">
+        @csrf
+        @method('DELETE')
+        <button class="btn btn-sm btn-outline-danger"
+            onclick="return confirm('Yakin ingin menghapus dokumen ini?')">
+            <i class="bi bi-trash me-1"></i> Hapus
+        </button>
+    </form>
+
+</td>
+
 
                             </tr>
                         @endforeach

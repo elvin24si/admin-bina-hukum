@@ -17,12 +17,15 @@ class CreateUserDummy extends Seeder
 
         $password = Hash::make('password');
 
-        foreach (range(1, 1000) as $index) {
+        foreach (range(1, 100) as $index) {
+            $role = $faker->randomElement(['admin', 'viewer']);
+
             DB::table('users')->insert([
                 'name'              => $faker->name(),
                 'email'             => $faker->unique()->safeEmail(),
                 'email_verified_at' => now(),
                 'password'          => $password,
+                'role'              => $role,
                 'remember_token'    => Str::random(10),
             ]);
         }

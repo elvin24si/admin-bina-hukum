@@ -32,14 +32,14 @@
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Nomor Dokumen <span class="text-danger">*</span></label>
-                    <input type="text" name="nomor" class="form-control"
-                        value="{{ old('nomor', $dokumen->nomor) }}" required>
+                    <input type="text" name="nomor" class="form-control" value="{{ old('nomor', $dokumen->nomor) }}"
+                        required>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Judul <span class="text-danger">*</span></label>
-                    <input type="text" name="judul" class="form-control"
-                        value="{{ old('judul', $dokumen->judul) }}" required>
+                    <input type="text" name="judul" class="form-control" value="{{ old('judul', $dokumen->judul) }}"
+                        required>
                 </div>
 
                 <div class="mb-3 text-start">
@@ -76,13 +76,26 @@
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Status <span class="text-danger">*</span></label>
-                    <input type="text" name="status" class="form-control"
-                        value="{{ old('status', $dokumen->status) }}" required>
+                    <input type="text" name="status" class="form-control" value="{{ old('status', $dokumen->status) }}"
+                        required>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Ringkasan</label>
                     <textarea name="ringkasan" class="form-control" rows="4">{{ old('ringkasan', $dokumen->ringkasan) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-select" required>
+                        <option value="">-- Pilih Role --</option>
+                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
+                            Admin
+                        </option>
+                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
+                            Viewer
+                        </option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

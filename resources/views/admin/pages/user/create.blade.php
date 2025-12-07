@@ -58,8 +58,21 @@
 
                 <div class="mb-3">
                     <label for="password_confirmation">Konfirmasi Password</label>
-                    <input type="password" class="form-control" id="password_confirmation"
-                        name="password_confirmation" placeholder="Ulangi Password User" required>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                        placeholder="Ulangi Password User" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Role</label>
+                    <select name="role" class="form-select" required>
+                        <option value="">-- Pilih Role --</option>
+                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
+                            Admin
+                        </option>
+                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
+                            Viewer
+                        </option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>

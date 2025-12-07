@@ -5,7 +5,7 @@
     <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <span class="d-none d-lg-inline-flex">Contact Support</span>
+                <span class="d-none d-lg-inline-flex">{{Auth::user()->name}}</span>
             </a>
         </div>
     </div>

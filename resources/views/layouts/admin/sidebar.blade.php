@@ -7,6 +7,7 @@
             <a href="{{ route('dashboard') }}" class="nav-item nav-link">
                 <i class="fa fa-home me-1"></i> Dashboard
             </a>
+            @if(auth()->user()->role === 'admin')
             <a href="{{ route('warga.index') }}" class="nav-item nav-link">
                 <i class="fa fa-users me-1"></i> Data Warga
             </a>
@@ -23,7 +24,8 @@
                 <i class="fa fa-users me-1"></i> Data User
             </a>
             <div class="d-flex justify-content-center">
-            <a href="/" class="btn btn-danger ms-3 mb-3">
+            @endif
+            <a href="{{route('logout')}}" class="btn btn-danger ms-3 mb-3">
                 <i class="fa fa-sign-out-alt me-2"></i> Logout
             </a>
         </div>

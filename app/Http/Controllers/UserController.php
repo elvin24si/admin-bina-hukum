@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -35,39 +36,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'     => ['required', 'string', 'max:100'],
-            'email'    => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'     => 'required|string|max:100',
+            'email'    => 'required|email|unique:users,email',
+            'role'     => 'required|in:admin,viewer',
+            'password' => 'required|string|min:8|confirmed',
         ], [
-            'name.required'      => 'Nama wajib diisi.',
-            'name.string'        => 'Nama harus berupa teks.',
-            'name.max'           => 'Nama maksimal 100 karakter.',
-
-            'email.required'     => 'Email wajib diisi.',
-            'email.email'        => 'Format email tidak valid.',
-            'email.unique'       => 'Email sudah terdaftar.',
-
-            'password.required'  => 'Kata sandi wajib diisi.',
-            'password.min'       => 'Kata sandi minimal 8 karakter.',
-            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'role.required' => 'Role wajib dipilih.',
+            'role.in'       => 'Role tidak valid.',
         ]);
 
-        User::create(
-            [
-                'name'     => $validated['name'],
-                'email'    => $validated['email'],
-                'password' => Hash::make($validated['password']),
-            ]);
+        User::create([
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
+            'role'     => $validated['role'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
-        return redirect()->route('user.index')->with('success', 'Penambahan Data User Berhasil!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'Penambahan Data User Berhasil!');
     }
 
     /**
@@ -84,15 +71,29 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $id   = $id;
         $user = User::findOrFail($id);
 
-        $user->name     = $request->name;
-        $user->email    = $request->email;
-        $user->password = $request->password;
+        $validated = $request->validate([
+            'name'     => 'required|string|max:100',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
+            'role'     => 'required|in:admin,viewer',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $user->name  = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role  = $validated['role'];
+
+        // Update password only if filled
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
 
         $user->save();
-        return redirect()->route('user.index')->with('success', 'Perubahan Data User Berhasil!');
+
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'Perubahan Data User Berhasil!');
     }
 
     /**
@@ -103,6 +104,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', 'Data User Berhasil Dihapus!');
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'Data User Berhasil Dihapus!');
     }
 }
