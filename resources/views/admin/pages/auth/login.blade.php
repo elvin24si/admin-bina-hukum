@@ -127,11 +127,8 @@
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
         </div>
-        <p class="text-center site-description mt-3">
-            Platform pengelolaan produk hukum dan dokumen publik bina desa.
-        </p>
-        <div class="footer">
-            &copy; <a href="#">Bina Desa Dokumen Hukum</a>, All Right Reserved.
+        <div class="text-center footer">
+            &copy; <a href="#">Bina Desa Dokumen Hukum</a>, 2025, All Right Reserved.
         </div>
     </div>
 

@@ -1,72 +1,79 @@
 @extends('layouts.admin.app')
 @section('title', 'Dashboard')
+
 @section('content')
+
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
-    <!-- Data Warga Start -->
-    <div class="container-fluid pt-4 px-4">
-        <div class="bg-light text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Data Warga</h6>
-            </div>
 
-            <div class="table-responsive">
-                <table id="table-warga" class="table table-centered table-nowrap mb-0 rounded">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-0 rounded-start">No. KTP</th>
-                            <th class="border-0">Nama</th>
-                            <th class="border-0">Jenis Kelamin</th>
-                            <th class="border-0">Agama</th>
-                            <th class="border-0">Pekerjaan</th>
-                            <th class="border-0">Telp</th>
-                            <th class="border-0 rounded-end">Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dataWarga as $item)
-                            <tr>
-                                <td>{{ $item->no_ktp }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>
-                                    @if ($item->jenis_kelamin === 'Laki-laki')
-                                        <span class="badge rounded-pill px-3 py-2 text-white"
-                                            style="background-color: #2196f3;">
-                                            {{ $item->jenis_kelamin }}
-                                        </span>
-                                    @elseif ($item->jenis_kelamin === 'Perempuan')
-                                        <span class="badge rounded-pill px-3 py-2 text-dark"
-                                            style="background-color: #ff7a87;">
-                                            {{ $item->jenis_kelamin }}
-                                        </span>
-                                    @endif
-                                </td>
-                                <td>{{ $item->agama }}</td>
-                                <td>{{ $item->pekerjaan ?? '-' }}</td>
-                                <td>{{ $item->telp ?? '-' }}</td>
-                                <td>{{ $item->email ?? '-' }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="mt-3">
-                    {{ $dataWarga->links('pagination::bootstrap-5') }}
+    {{-- Load Chart.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- ============================= -->
+    <!--        WARGA CHARTS          -->
+    <!-- ============================= -->
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row">
+
+            <!-- Gender Chart -->
+            <div class="col-md-6">
+                <div class="bg-light text-center rounded p-4 mb-4">
+                    <h6 class="mb-3">Warga Berdasarkan Jenis Kelamin</h6>
+                    <div style="height: 300px;">
+                        <canvas id="genderChart"></canvas>
+                    </div>
                 </div>
             </div>
+
+            <!-- Religion Chart -->
+            <div class="col-md-6">
+                <div class="bg-light text-center rounded p-4 mb-4">
+                    <h6 class="mb-3">Warga Berdasarkan Agama</h6>
+                    <div style="height: 300px;">
+                        <canvas id="religionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="bg-light text-center rounded p-4 mb-4">
+                    <h6 class="mb-3">Dokumen Hukum Berdasarkan Status</h6>
+                    <div style="height: 280px; width: 60%; margin: 0 auto;">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <!-- Data Warga End -->
 
-    <!-- Dokumen Hukum Start -->
+
+
+    <!-- ============================= -->
+    <!--     DOKUMEN HUKUM CHART      -->
+    <!-- ============================= -->
+
+
+
+
+
+    <!-- ======================================================== -->
+    <!--               DOKUMEN HUKUM TABLE (PAGINATED)            -->
+    <!-- ======================================================== -->
+
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
+
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Dokumen Hukum</h6>
+                <h6 class="mb-0">Daftar Dokumen Hukum</h6>
             </div>
+
             <div class="table-responsive">
                 <table class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
@@ -80,6 +87,7 @@
                             <th class="border-0 rounded-end">Ringkasan</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach ($dataDokumenHukum as $item)
                             <tr>
@@ -88,7 +96,22 @@
                                 <td>{{ $item->jenis?->nama_jenis ?? '-' }}</td>
                                 <td>{{ $item->kategori?->nama ?? '-' }}</td>
                                 <td>{{ $item->tanggal ? date('d M Y', strtotime($item->tanggal)) : '-' }}</td>
-                                <td>{{ $item->status }}</td>
+
+                                <td>
+                                    @php
+                                        $colors = [
+                                            'Aktif' => '#0cb200',
+                                            'Tidak Aktif' => '#d40000',
+                                            'Draft' => '#5221f3',
+                                            'Revisi' => '#d4ca00',
+                                        ];
+                                    @endphp
+
+                                    <span class="badge rounded-pill px-3 py-2 text-white"
+                                        style="background-color: {{ $colors[$item->status] ?? '#777' }};">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
 
                                 <td>
                                     <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
@@ -104,22 +127,80 @@
                                                     <h5 class="modal-title">Ringkasan Dokumen</h5>
                                                     <button class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
+
                                                 <div class="modal-body">
                                                     {{ $item->ringkasan ?? 'Tidak ada ringkasan.' }}
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
+
                 <div class="mt-3">
                     {{ $dataDokumenHukum->links('pagination::bootstrap-5') }}
                 </div>
+
             </div>
+
         </div>
     </div>
-    <!-- Jenis Dokumen End -->
+
+
+
+
+    <!-- ============================= -->
+    <!--        CHART JAVASCRIPT      -->
+    <!-- ============================= -->
+
+    <script>
+        /* -------- WARGA: GENDER -------- */
+        new Chart(document.getElementById("genderChart"), {
+            type: "pie",
+            data: {
+                labels: {!! json_encode($genderCounts->keys()) !!},
+                datasets: [{
+                    data: {!! json_encode($genderCounts->values()) !!}
+                }]
+            }
+        });
+
+        /* -------- WARGA: RELIGION -------- */
+        new Chart(document.getElementById("religionChart"), {
+            type: "bar",
+            data: {
+                labels: {!! json_encode($religionCounts->keys()) !!},
+                datasets: [{
+                    label: "Jumlah",
+                    data: {!! json_encode($religionCounts->values()) !!}
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        /* -------- DOKUMEN HUKUM: STATUS -------- */
+        new Chart(document.getElementById("statusChart"), {
+            type: "doughnut",
+            data: {
+                labels: {!! json_encode($statusCounts->keys()) !!},
+                datasets: [{
+                    data: {!! json_encode($statusCounts->values()) !!}
+                }]
+            }
+        });
+    </script>
+
 @endsection

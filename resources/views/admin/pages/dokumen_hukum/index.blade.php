@@ -62,7 +62,7 @@
                             <th class="border-0">Kategori</th>
                             <th class="border-0">Tanggal</th>
                             <th class="border-0">Status</th>
-                            <th class="border-0">Lampiran</th>
+                            <th class="border-0">Lampiran & Detail</th>
                             <th class="border-0 rounded-end">Action</th>
                         </tr>
                     </thead>

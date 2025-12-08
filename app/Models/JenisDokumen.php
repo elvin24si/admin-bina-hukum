@@ -3,9 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class JenisDokumen extends Model
 {
+    use HasFactory;
     protected $table      = 'jenis_dokumen';
     protected $primaryKey = 'jenis_id';
     protected $fillable   = ['nama_jenis', 'deskripsi'];

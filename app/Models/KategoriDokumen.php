@@ -3,9 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class KategoriDokumen extends Model
 {
+    use HasFactory;
     protected $table      = 'kategori_dokumen';
     protected $primaryKey = 'kategori_id';
     protected $fillable   = ['nama', 'deskripsi'];

@@ -16,6 +16,7 @@ class WargaController extends Controller
 
     $data['dataWarga'] = Warga::filter($request, $filterableColumns)
         ->search($request, $searchableColumns)
+        ->orderBy('created_at', 'desc')
         ->paginate(10)->withQueryString();
 
     return view('admin.pages.warga.index', $data);

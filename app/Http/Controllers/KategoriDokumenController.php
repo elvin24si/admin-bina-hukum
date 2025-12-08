@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\KategoriDokumen;
@@ -15,6 +14,7 @@ class KategoriDokumenController extends Controller
         $searchableColumns = ['nama', 'deskripsi'];
 
         $data['dataKategoriDokumen'] = KategoriDokumen::search($request, $searchableColumns)
+            ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
 

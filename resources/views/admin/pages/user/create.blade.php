@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('user.store') }}" method="POST">
+            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -66,18 +66,42 @@
                     <label class="form-label">Role</label>
                     <select name="role" class="form-select" required>
                         <option value="">-- Pilih Role --</option>
-                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
-                            Admin
-                        </option>
-                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
-                            Viewer
-                        </option>
+                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="viewer" {{ old('role') == 'viewer' ? 'selected' : '' }}>Viewer</option>
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="profile_picture">Foto Profil (Opsional)</label>
+                    <input type="file" class="form-control @error('profile_picture') is-invalid @enderror"
+                        id="profile_picture" name="profile_picture" accept="image/*">
+
+                    @error('profile_picture')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+
+                    <div class="mt-3">
+                        <img id="previewImage" src="#" alt="Preview Gambar" class="img-thumbnail d-none"
+                            width="120">
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan Data</button>
                 <a href="{{ route('user.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
             </form>
+
+            <!-- Preview Script -->
+            <script>
+                document.getElementById('profile_picture').onchange = evt => {
+                    const [file] = evt.target.files;
+                    if (file) {
+                        const img = document.getElementById('previewImage');
+                        img.src = URL.createObjectURL(file);
+                        img.classList.remove('d-none');
+                    }
+                }
+            </script>
+
         </div>
     </div>
 @endsection

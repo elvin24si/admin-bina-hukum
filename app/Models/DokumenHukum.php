@@ -3,9 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class DokumenHukum extends Model
 {
+    use HasFactory;
     protected $table      = 'dokumen_hukum';
     protected $primaryKey = 'dokumen_id';
     protected $fillable   = [

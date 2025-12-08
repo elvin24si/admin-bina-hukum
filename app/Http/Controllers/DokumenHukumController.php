@@ -21,6 +21,7 @@ class DokumenHukumController extends Controller
 
         $data['dataDokumenHukum'] = DokumenHukum::filter($request, $filterableColumns)
             ->search($request, $searchableColumns)
+            ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\JenisDokumen;
@@ -15,6 +14,7 @@ class JenisDokumenController extends Controller
         $searchableColumns = ['nama_jenis', 'deskripsi'];
 
         $data['dataJenisDokumen'] = JenisDokumen::search($request, $searchableColumns)
+            ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
 

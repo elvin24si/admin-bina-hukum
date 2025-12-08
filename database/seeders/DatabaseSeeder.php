@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CreateFirstUser::class,
             CreateUserDummy::class,
-            KategoriDokumenSeeder::class,
-            JenisDokumenSeeder::class,
+            CreateFirstUser::class,
+            CreateKategoriDokumen::class,
+            CreateJenisDokumen::class,
             DokumenHukumSeeder::class,
             WargaSeeder::class,
         ]);

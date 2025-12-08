@@ -41,7 +41,8 @@
                 <table id="table-jenis-dokumen" class="table table-centered table-nowrap mb-0 rounded">
                     <thead class="thead-light">
                         <tr>
-                            <th class="border-0 rounded-start">Nama</th>
+                            <th class="border-0 rounded-start">Profile</th>
+                            <th class="border-0">Nama</th>
                             <th class="border-0">Email</th>
                             <th class="border-0">Password</th>>
                             <th class="border-0">Role</th>>
@@ -51,6 +52,15 @@
                     <tbody>
                         @foreach ($dataUser as $item)
                             <tr>
+                                <td>
+                                    @if ($item->profile_picture)
+                                        <img src="{{ asset('storage/' . $item->profile_picture) }}"
+                                        alt="Profile Picture" class="rounded-circle" width="50" height="50">
+                                    @else
+                                        <img src="{{ asset('img/User_Placeholder.png') }}" alt="Default Profile Picture"
+                                            class="rounded-circle" width="50" height="50">
+                                    @endif
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->password }}</td>

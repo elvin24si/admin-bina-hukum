@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('user.update', $dataUser->id) }}" method="POST">
+            <form action="{{ route('user.update', $dataUser->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -75,9 +75,49 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="profile_picture">Foto Profil (Opsional)</label>
+                    <input type="file" class="form-control @error('profile_picture') is-invalid @enderror"
+                        id="profile_picture" name="profile_picture" accept="image/*">
+
+                    @error('profile_picture')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+
+                    <!-- Current Profile Picture -->
+                    <div class="mt-3">
+                        @if ($dataUser->profile_picture)
+                            <p>Foto Profil Saat Ini:</p>
+                            <img src="{{ asset('storage/' . $dataUser->profile_picture) }}" alt="Profile Picture"
+                                width="120" class="img-thumbnail mb-2">
+                        @else
+                            <p class="text-muted">Belum ada foto profil</p>
+                        @endif
+                    </div>
+
+                    <!-- Preview New Upload -->
+                    <p>Foto Profil Baru:</p>
+                    <div class="mt-3">
+                        <img id="previewImage" src="#" alt="Preview Gambar" class="img-thumbnail d-none"
+                            width="120">
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 <a href="{{ route('user.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
             </form>
+
+            <!-- Preview Script -->
+            <script>
+                document.getElementById('profile_picture').onchange = evt => {
+                    const [file] = evt.target.files;
+                    if (file) {
+                        const img = document.getElementById('previewImage');
+                        img.src = URL.createObjectURL(file);
+                        img.classList.remove('d-none');
+                    }
+                }
+            </script>
         </div>
     </div>
 @endsection
