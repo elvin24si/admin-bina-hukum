@@ -85,9 +85,7 @@
             <div class="text-center mb-4 title-section">
                 <img src="img/logo.png" height="100px" width="100px" alt="Bina Desa Logo" class="logo">
 
-                <h2 class="site-title">BINA DESA</h2>
-
-                <p class="site-subtitle">Produk Hukum dan Dokumen Publik</p>
+                <h2 class="site-title">Produk Hukum dan Dokumen Publik</h2>
 
                 <h4 class="mb-0 mt-3">Login</h4>
             </div>
