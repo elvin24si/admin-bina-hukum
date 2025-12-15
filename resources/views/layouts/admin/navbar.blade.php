@@ -4,17 +4,19 @@
     </a>
 
     <div class="navbar-nav align-items-center ms-auto">
-        <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+        <div class="nav-item">
 
-                <img src="{{ Auth::user()->profile_picture
-                    ? asset('storage/' . Auth::user()->profile_picture)
-                    : asset('img/default-avatar.png') }}"
-                    class="rounded-circle me-2" width="36" height="36" alt="Profile">
+            @if (Auth::user()->profile_picture)
+                <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
+                    class="rounded-circle me-2" width="36" height="36">
+            @else
+                <img src="{{ asset('img/User_Placeholder.png') }}" alt="Default Profile Picture"
+                    class="rounded-circle me-2" width="36" height="36">
+            @endif
 
-                <span class="d-none d-lg-inline-flex">
-                    {{ Auth::user()->name }}
-                </span>
+            <span class="d-none d-lg-inline-flex">
+                {{ Auth::user()->name }}
+            </span>
             </a>
         </div>
     </div>
