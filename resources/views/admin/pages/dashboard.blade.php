@@ -12,39 +12,34 @@
 
     {{-- Load Chart.js --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-    <!-- ============================= -->
-    <!--        WARGA CHARTS          -->
-    <!-- ============================= -->
-
     <div class="container-fluid pt-4 px-4">
-        <div class="row">
+        <div class="row g-4">
 
             <!-- Gender Chart -->
-            <div class="col-md-6">
-                <div class="bg-light text-center rounded p-4 mb-4">
-                    <h6 class="mb-3">Warga Berdasarkan Jenis Kelamin</h6>
-                    <div style="height: 300px;">
+            <div class="col-xl-4 col-md-6">
+                <div class="bg-light rounded p-4 h-100 d-flex flex-column">
+                    <h6 class="mb-3 text-center">Warga Berdasarkan Jenis Kelamin</h6>
+                    <div class="chart-container flex-grow-1">
                         <canvas id="genderChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Religion Chart -->
-            <div class="col-md-6">
-                <div class="bg-light text-center rounded p-4 mb-4">
-                    <h6 class="mb-3">Warga Berdasarkan Agama</h6>
-                    <div style="height: 300px;">
+            <div class="col-xl-4 col-md-6">
+                <div class="bg-light rounded p-4 h-100 d-flex flex-column">
+                    <h6 class="mb-3 text-center">Warga Berdasarkan Agama</h6>
+                    <div class="chart-container flex-grow-1">
                         <canvas id="religionChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="bg-light text-center rounded p-4 mb-4">
-                    <h6 class="mb-3">Dokumen Hukum Berdasarkan Status</h6>
-                    <div style="height: 280px; width: 60%; margin: 0 auto;">
+            <!-- Status Chart -->
+            <div class="col-xl-4 col-md-6">
+                <div class="bg-light rounded p-4 h-100 d-flex flex-column">
+                    <h6 class="mb-3 text-center">Dokumen Hukum Berdasarkan Status</h6>
+                    <div class="chart-container flex-grow-1">
                         <canvas id="statusChart"></canvas>
                     </div>
                 </div>
@@ -52,15 +47,6 @@
 
         </div>
     </div>
-
-
-
-    <!-- ============================= -->
-    <!--     DOKUMEN HUKUM CHART      -->
-    <!-- ============================= -->
-
-
-
 
 
     <!-- ======================================================== -->

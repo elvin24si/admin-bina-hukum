@@ -50,7 +50,7 @@
                 <div class="mb-3">
                     <label for="password">Password Baru</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                        name="password" placeholder="Masukkan Password Baru" required>
+                        name="password" placeholder="Masukkan Password Baru">
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
