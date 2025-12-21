@@ -73,27 +73,20 @@
                 </div>
 
                 <div class="mb-3 text-start">
-                    <label class="form-label">Status <span class="text-danger">*</span></label>
-                    <input type="text" name="status" class="form-control" placeholder="Status dokumen"
-                        value="{{ old('status') }}" required>
-                </div>
+    <label class="form-label">Status <span class="text-danger">*</span></label>
+    <select name="status" class="form-select" required>
+        <option value="">-- Pilih Status --</option>
+        <option value="Aktif" {{ old('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+        <option value="Tidak Aktif" {{ old('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+        <option value="Draft" {{ old('status') == 'Draft' ? 'selected' : '' }}>Draft</option>
+        <option value="Revisi" {{ old('status') == 'Revisi' ? 'selected' : '' }}>Revisi</option>
+    </select>
+</div>
+
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Ringkasan</label>
                     <textarea name="ringkasan" class="form-control" rows="4" placeholder="Ringkasan isi dokumen">{{ old('ringkasan') }}</textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select name="role" class="form-select" required>
-                        <option value="">-- Pilih Role --</option>
-                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
-                            Admin
-                        </option>
-                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
-                            Viewer
-                        </option>
-                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>

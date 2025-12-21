@@ -76,9 +76,16 @@
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Status <span class="text-danger">*</span></label>
-                    <input type="text" name="status" class="form-control" value="{{ old('status', $dokumen->status) }}"
-                        required>
+                    <select name="status" class="form-select" required>
+                        <option value="">-- Pilih Status --</option>
+                        <option value="Aktif" {{ old('status') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="Tidak Aktif" {{ old('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif
+                        </option>
+                        <option value="Draft" {{ old('status') == 'Draft' ? 'selected' : '' }}>Draft</option>
+                        <option value="Revisi" {{ old('status') == 'Revisi' ? 'selected' : '' }}>Revisi</option>
+                    </select>
                 </div>
+
 
                 <div class="mb-3 text-start">
                     <label class="form-label">Ringkasan</label>

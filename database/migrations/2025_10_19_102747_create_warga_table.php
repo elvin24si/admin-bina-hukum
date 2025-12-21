@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('warga', function (Blueprint $table) {
             $table->increments('warga_id');
-            $table->string('no_ktp', 50)->unique(); 
-            $table->string('nama', 100); 
+            $table->string('no_ktp', 50)->unique();
+            $table->string('nama', 100);
             $table->string('jenis_kelamin', 20);
             $table->string('agama', 50)->nullable();
             $table->string('pekerjaan', 100)->nullable();
-            $table->string('telp', 20)->nullable(); 
-            $table->string('email', 100)->nullable(); 
+            $table->string('telp', 20)->nullable();
+            $table->string('email', 100)->nullable();
             $table->timestamps();
         });
     }
