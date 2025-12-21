@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\DokumenHukum;
 use App\Models\JenisDokumen;
 use App\Models\KategoriDokumen;
 use App\Models\Media;
+use App\Models\RiwayatPerubahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,13 +28,12 @@ class DokumenHukumController extends Controller
         return view('admin.pages.dokumen_hukum.index', $data);
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $data['listJenis'] = JenisDokumen::all();
+        $data['listJenis']    = JenisDokumen::all();
         $data['listKategori'] = KategoriDokumen::all();
 
         return view('admin.pages.dokumen_hukum.create', $data);
@@ -66,7 +65,7 @@ class DokumenHukumController extends Controller
      */
     public function show(string $id)
     {
-        $dokumen = DokumenHukum::findOrFail($id);
+        $dokumen = DokumenHukum::with('riwayat')->findOrFail($id);
 
         $files = Media::where('ref_table', 'dokumen_hukum')
             ->where('ref_id', $id)
@@ -81,8 +80,8 @@ class DokumenHukumController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dokumen'] = DokumenHukum::findOrFail($id);
-        $data['listJenis'] = JenisDokumen::all();
+        $data['dokumen']      = DokumenHukum::findOrFail($id);
+        $data['listJenis']    = JenisDokumen::all();
         $data['listKategori'] = KategoriDokumen::all();
 
         return view('admin.pages.dokumen_hukum.edit', $data);
@@ -96,16 +95,29 @@ class DokumenHukumController extends Controller
         $dokumen = DokumenHukum::findOrFail($id);
 
         $validated = $request->validate([
-            'jenis_id'    => 'required|exists:jenis_dokumen,jenis_id',
-            'kategori_id' => 'required|exists:kategori_dokumen,kategori_id',
-            'nomor'       => 'required|string|max:255|unique:dokumen_hukum,nomor,' . $dokumen->dokumen_id . ',dokumen_id',
-            'judul'       => 'required|string|max:255',
-            'tanggal'     => 'nullable|date',
-            'ringkasan'   => 'nullable|string',
-            'status'      => 'required|string|max:50',
+            'jenis_id'         => 'required|exists:jenis_dokumen,jenis_id',
+            'kategori_id'      => 'required|exists:kategori_dokumen,kategori_id',
+            'nomor'            => 'required|string|max:255|unique:dokumen_hukum,nomor,' . $dokumen->dokumen_id . ',dokumen_id',
+            'judul'            => 'required|string|max:255',
+            'tanggal'          => 'nullable|date',
+            'ringkasan'        => 'nullable|string',
+            'status'           => 'required|string|max:50',
+
+            // Riwayat Perubahan
+            'versi'            => 'required|string|max:20',
+            'uraian_perubahan' => 'required|string',
         ]);
 
+        // Update dokumen
         $dokumen->update($validated);
+
+        // Simpan riwayat perubahan
+        RiwayatPerubahan::create([
+            'dokumen_id'       => $dokumen->dokumen_id,
+            'tanggal'          => now(),
+            'versi'            => $request->versi,
+            'uraian_perubahan' => $request->uraian_perubahan,
+        ]);
 
         return redirect()->route('dokumen_hukum.index')
             ->with('success', 'Dokumen hukum berhasil diperbarui!');

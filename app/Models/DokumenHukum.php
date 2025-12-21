@@ -22,6 +22,13 @@ class DokumenHukum extends Model
     {
         return $this->belongsTo(KategoriDokumen::class, 'kategori_id');
     }
+
+    public function riwayat()
+    {
+    return $this->hasMany(RiwayatPerubahan::class, 'dokumen_id')
+        ->orderBy('tanggal', 'desc');
+    }
+
         public function scopeFilter(Builder $query, $request, array $filterableColumns): Builder
     {
         foreach ($filterableColumns as $column) {

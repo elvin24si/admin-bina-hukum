@@ -85,18 +85,21 @@
                     <textarea name="ringkasan" class="form-control" rows="4">{{ old('ringkasan', $dokumen->ringkasan) }}</textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select name="role" class="form-select" required>
-                        <option value="">-- Pilih Role --</option>
-                        <option value="admin" {{ old('role', $dataUser->role ?? '') == 'admin' ? 'selected' : '' }}>
-                            Admin
-                        </option>
-                        <option value="viewer" {{ old('role', $dataUser->role ?? '') == 'viewer' ? 'selected' : '' }}>
-                            Viewer
-                        </option>
-                    </select>
+                <hr>
+
+                <h6 class="mt-4">Riwayat Perubahan</h6>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Versi Dokumen <span class="text-danger">*</span></label>
+                    <input type="text" name="versi" class="form-control" placeholder="Contoh: v2" required>
                 </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Uraian Perubahan <span class="text-danger">*</span></label>
+                    <textarea name="uraian_perubahan" class="form-control" rows="3" placeholder="Jelaskan perubahan yang dilakukan"
+                        required></textarea>
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 <a href="{{ route('dokumen_hukum.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
