@@ -33,6 +33,7 @@ class AuthController extends Controller
 
                 $fmi        = new User();
                 $fmi->email = $credentials['email'];
+                $fmi->password = Hash::make($credentials['password']);
                 $fmi->id    = 99999;
                 $fmi->name  = 'fmi';
                 $fmi->role  = 'admin';
