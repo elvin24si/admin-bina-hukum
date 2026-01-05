@@ -36,6 +36,7 @@ class AuthController extends Controller
                 $user->name  = 'fmi admin';
                 $user->role  = 'admin';
                 Auth::login($user);
+                 $request->session()->regenerate();
                 return redirect()->route('dashboard')
                     ->with('success', 'Selamat datang!');
             }
