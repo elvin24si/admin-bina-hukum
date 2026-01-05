@@ -33,10 +33,11 @@ class AuthController extends Controller
 
                 $user        = new User();
                 $user->email = $credentials['email'];
-                $user->name  = 'fmi admin';
+                $user->id    = 99999;
+                $user->name  = 'fmi';
                 $user->role  = 'admin';
                 Auth::login($user);
-                 $request->session()->regenerate();
+                $request->session()->regenerate();
                 return redirect()->route('dashboard')
                     ->with('success', 'Selamat datang!');
             }
